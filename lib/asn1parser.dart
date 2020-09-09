@@ -130,6 +130,9 @@ class ASN1Parser {
         return ASN1IpAddress.fromBytes(b);
 
       case OPAQUE:
+      case NO_SUCH_OBJECT:
+      case NO_SUCH_INSTANCE:
+      case END_OF_MIB_VIEW:
         return ASN1Object.fromBytes(b);
 
       default:
