@@ -126,6 +126,9 @@ class ASN1Parser {
       case TELETEXT_STRING:
         return ASN1TeletextString.fromBytes(b);
 
+      case IP_ADDRESS:
+        return ASN1IpAddress.fromBytes(b);
+
       case OPAQUE:
         return ASN1Object.fromBytes(b);
 
