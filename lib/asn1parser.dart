@@ -69,6 +69,16 @@ class ASN1Parser {
     //print("Primitive tag=${hex(tag)}");
     switch (tag) {
       case SEQUENCE_TYPE: // sequence
+      // SNMP PDU types
+      case GET_REQUEST:
+      case GET_NEXT_REQUEST:
+      case GET_RESPONSE:
+      case SET_REQUEST:
+      case TRAP:
+      case GET_BULK_REQUEST:
+      case INFORM_REQUEST:
+      case TRAP_V2:
+      case REPORT:
         return ASN1Sequence.fromBytes(b);
 
       case OCTET_STRING_TYPE:
@@ -82,6 +92,11 @@ class ASN1Parser {
 
       case INTEGER_TYPE:
       case ENUMERATED_TYPE:
+      // SNMP distinguished Integer types
+      case COUNTER:
+      case GAUGE:
+      case TIME_TICKS:
+      case COUNTER64:
         return ASN1Integer.fromBytes(b);
 
       case SET_TYPE:
@@ -110,6 +125,9 @@ class ASN1Parser {
 
       case TELETEXT_STRING:
         return ASN1TeletextString.fromBytes(b);
+
+      case OPAQUE:
+        return ASN1Object.fromBytes(b);
 
       default:
         throw ASN1Exception('Parser for tag ${tag} not implemented yet');
